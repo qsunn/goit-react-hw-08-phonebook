@@ -1,4 +1,5 @@
 export const styles = {
+    activeLink: ({ isActive }) => (isActive ? 'text-lime-300' : 'white'),
     container: 'flex flex-col gap-4 justify-center mx-auto md:w-80',
     button: 'px-8 py-2 bg-lime-400 text-zinc-900 font-medium uppercase rounded-md',
     title: 'font-bold text-xl text-center',

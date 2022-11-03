@@ -5,9 +5,7 @@ import { selectAuth } from 'redux/selectors';
 import { logOut } from 'redux/auth/operations';
 export const UserMenu = () => {
   const dispatch = useDispatch();
-  const {
-    user: { name },
-  } = useSelector(selectAuth);
+  const { user: { name } } = useSelector(selectAuth);
   return (
     <div className={`${styles.flexRow} gap-12`}>
       <div>Welcome, {name}</div>
