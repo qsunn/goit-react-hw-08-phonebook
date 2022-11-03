@@ -1,22 +1,19 @@
 import { useDispatch } from 'react-redux';
-import { deleteContact } from 'redux/operations';
+import { deleteContact } from 'redux/contacts/operations';
 import { PropTypes } from 'prop-types';
+import { MdClose } from 'react-icons/md';
 
 export const Contact = ({ contact }) => {
   const dispatch = useDispatch();
 
   const { name, number, id } = contact;
   return (
-    <li>
+    <li className="flex justify-between">
       <p>
         {name}: {number}
       </p>
-      <button
-        type="button"
-        className="delete"
-        onClick={() => dispatch(deleteContact(id))}
-      >
-        Delete
+      <button type="button" onClick={() => dispatch(deleteContact(id))}>
+        <MdClose className="text-md text-lime-300" />
       </button>
     </li>
   );

@@ -1,17 +1,24 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { addContact } from 'redux/contacts/operations';
+import { toast } from 'react-toastify';
+import { register } from 'redux/auth/operations';
 import { styles } from 'utils/styles';
 
-export const ContactForm = () => {
+export const RegisterForm = () => {
   const [name, setName] = useState('');
-  const [number, setNumber] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
   const dispatch = useDispatch();
 
   const reset = () => {
     setName('');
-    setNumber('');
+    setEmail('');
+    setPassword('');
+  };
+
+  const passValidate = pass => {
+    return pass.length >= 7 ? pass : null;
   };
 
   const changeHandler = e => {
@@ -20,8 +27,11 @@ export const ContactForm = () => {
       case 'name':
         setName(value);
         break;
-      case 'number':
-        setNumber(value);
+      case 'email':
+        setEmail(value);
+        break;
+      case 'password':
+        setPassword(value);
         break;
       default:
         throw new Error(`Invalid field: ${name}`);
@@ -30,11 +40,9 @@ export const ContactForm = () => {
 
   const submitHandler = e => {
     e.preventDefault();
-    const newContact = {
-      name: name,
-      number: number,
-    };
-    dispatch(addContact(newContact));
+    if (!passValidate(password)) return toast.error('Password is shorter than the minimum allowed length (7).')
+    const newUser = { name, email, password };
+    dispatch(register(newUser));
     reset();
   };
 
@@ -45,7 +53,7 @@ export const ContactForm = () => {
         <input
           onChange={changeHandler}
           value={name}
-          placeholder="Enter contact name"
+          placeholder="Enter your name"
           type="text"
           name="name"
           pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
@@ -56,21 +64,34 @@ export const ContactForm = () => {
       </label>
 
       <label>
-        <span>Number:</span>
+        <span>Email:</span>
         <input
           onChange={changeHandler}
-          value={number}
-          placeholder="Enter contact number"
-          type="tel"
-          name="number"
-          pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
-          title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
+          value={email}
+          placeholder="Enter your email"
+          type="email"
+          name="email"
           required
           className={styles.formInput}
         />
       </label>
 
-      <button type="submit" className={`${styles.button} mt-6 mb-4`}>Add contact</button>
+      <label>
+        <span>Password:</span>
+        <input
+          onChange={changeHandler}
+          value={password}
+          placeholder="Enter your password"
+          type="password"
+          name="password"
+          required
+          className={styles.formInput}
+        />
+      </label>
+
+      <button type="submit" className={`${styles.button} mt-6 mb-4`}>
+        Register
+      </button>
     </form>
   );
 };
