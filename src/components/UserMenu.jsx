@@ -9,7 +9,7 @@ export const UserMenu = () => {
     user: { name },
   } = useSelector(selectAuth);
   return (
-    <div className={styles.flexRow}>
+    <div className={`${styles.flexRow} gap-12`}>
       <div>Welcome, {name}</div>
       <button type="button" onClick={() => dispatch(logOut())}>
         <MdLogout className="text-lg text-lime-300" />
