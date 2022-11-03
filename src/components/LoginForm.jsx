@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { logIn } from 'redux/auth/operations';
 import { styles } from 'utils/styles';
 
 export const LoginForm = () => {
@@ -29,11 +30,8 @@ export const LoginForm = () => {
 
   const submitHandler = e => {
     e.preventDefault();
-    // const newUser = {
-    //   name: name,
-    //   number: number,
-    // };
-    // dispatch(addUser(newUser));
+    const credentials = { email, password };
+    dispatch(logIn(credentials));
     reset();
   };
 

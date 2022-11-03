@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { toast } from 'react-toastify';
 import { register } from 'redux/auth/operations';
 import { styles } from 'utils/styles';
+import { Toast } from './Toast';
 
 export const RegisterForm = () => {
   const [name, setName] = useState('');
@@ -17,8 +17,14 @@ export const RegisterForm = () => {
     setPassword('');
   };
 
-  const passValidate = pass => {
-    return pass.length >= 7 ? pass : null;
+  const credentialsValidate = credentials => {
+    const { name, email, password } = credentials;
+
+    return (
+      password.length >= 7 &&
+      name.split(' ').length === 2 &&
+      email.includes('.')
+    );
   };
 
   const changeHandler = e => {
@@ -40,9 +46,14 @@ export const RegisterForm = () => {
 
   const submitHandler = e => {
     e.preventDefault();
-    if (!passValidate(password)) return toast.error('Password is shorter than the minimum allowed length (7).')
-    const newUser = { name, email, password };
-    dispatch(register(newUser));
+
+    const credentials = { name, email, password };
+
+    if (!credentialsValidate(credentials))
+      return <Toast message="Password can't be less than 7 characters" />;
+
+    dispatch(register(credentials));
+
     reset();
   };
 

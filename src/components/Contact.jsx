@@ -13,7 +13,7 @@ export const Contact = ({ contact }) => {
         {name}: {number}
       </p>
       <button type="button" onClick={() => dispatch(deleteContact(id))}>
-        <MdClose className="text-md text-lime-300" />
+        <MdClose className="text-md text-lime-400" />
       </button>
     </li>
   );

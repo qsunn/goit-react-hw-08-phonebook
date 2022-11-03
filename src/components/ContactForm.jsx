@@ -30,10 +30,7 @@ export const ContactForm = () => {
 
   const submitHandler = e => {
     e.preventDefault();
-    const newContact = {
-      name: name,
-      number: number,
-    };
+    const newContact = { name, number };
     dispatch(addContact(newContact));
     reset();
   };
@@ -70,7 +67,9 @@ export const ContactForm = () => {
         />
       </label>
 
-      <button type="submit" className={`${styles.button} mt-6 mb-4`}>Add contact</button>
+      <button type="submit" className={`${styles.button} mt-6 mb-4`}>
+        Add contact
+      </button>
     </form>
   );
 };

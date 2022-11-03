@@ -1,6 +1,6 @@
 export const styles = {
     container: 'flex flex-col gap-4 justify-center mx-auto md:w-80',
-    button: 'px-8 py-2 bg-lime-300 text-zinc-900 font-medium uppercase rounded-md',
+    button: 'px-8 py-2 bg-lime-400 text-zinc-900 font-medium uppercase rounded-md',
     title: 'font-bold text-xl text-center',
     flexRow: 'flex gap-4',
     flexCol: 'flex flex-col gap-4',
