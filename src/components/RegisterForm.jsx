@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { toast } from 'react-toastify';
 import { register } from 'redux/auth/operations';
 import { styles } from 'utils/styles';
-import { Toast } from './Toast';
 
 export const RegisterForm = () => {
   const [name, setName] = useState('');
@@ -50,7 +50,15 @@ export const RegisterForm = () => {
     const credentials = { name, email, password };
 
     if (!credentialsValidate(credentials))
-      return <Toast message="Password can't be less than 7 characters" />;
+      return toast.error("You have invalid fields", {
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: 'dark',
+      });
 
     dispatch(register(credentials));
 
